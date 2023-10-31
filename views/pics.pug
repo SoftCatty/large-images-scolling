@@ -1,0 +1,144 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=yes')
+    link(rel='stylesheet' href='css/styles.css')
+    title Horizontal Scroll Images
+    script(src='https://code.jquery.com/jquery-3.7.1.min.js' integrity='sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=' crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js' integrity='sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g==' crossorigin='anonymous' referrerpolicy='no-referrer')
+    script(src='js/img-observe.js')
+    style.
+        /* 模态框样式 */
+        .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.8);
+        /* touch-action: none; */
+        }
+        //- .modal-content {
+        //- margin: 0% auto;
+        //- padding: 20px;
+        //- width: 100%;
+        //- position: relative;
+        //- max-width: 100%;
+        //- max-height: 100vh;
+        //- }
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            max-height: 100%;
+            justify-content: center;
+        }
+        .modal-image {
+        display: flex;
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        max-height: 100vh;
+        object-fit: fill;
+        }
+        .close {
+        color: rgb(245, 4, 76);
+        position: relative;
+        left: 20px;
+        font-size: 32px;
+        cursor: pointer;
+        }
+        .center-container {
+        display: list-item;
+        justify-content: center;
+        /* 水平居中 */
+        align-items: center;
+        /* 垂直居中 */
+        height: 100%;
+        /* 父元素高度 */
+        }
+        .centered-div {
+        background-color: lightblue;
+        padding: 1rem;
+        width: 100%;
+        }
+        .page-container {
+        position: relative;
+        }
+        .page-text {
+        position: absolute;
+        z-index: 2;
+        color: rgba(245, 11, 11, 0.5);
+        font-size: 40px;
+        /* 设置透明度，0.5表示50%透明 */
+        }
+        input,
+        span,
+        button {
+        font-size: 30px;
+        }
+div
+    #img-con.scrolling-container
+        // Add more images
+#myModal.modal
+    .modal-content
+        span.close &times;
+        img#modal-image.modal-image(src='' alt='放大图片')
+script.
+    const hor = #{tHor};
+    if(!hor)
+    {
+        $("#img-con").attr("class", "vertical-scroll-container");
+    }
+
+    function getImgCount() {
+        return #{tImgCount};
+    }
+    function fetchItems() {
+    const p = `#{tPattern}`;
+    const startNumber = #{tStartNumber};
+    const padZeros = #{tPadZeros};
+    const imgCount = #{tImgCount};
+    const useProxy = #{tUseProxy};
+    for (let i = 0; i < imgCount; i++) {
+    const urlImgId = (i + startNumber).toString().padStart(padZeros, '0');
+    let imgSrc = p.replace('{img-id}', urlImgId);
+    if (useProxy) {
+    imgSrc = `/proxy/image?url=${imgSrc}`;
+    }
+    const newImage = $('<img>', {
+    src: imgSrc,
+    alt: `image ${i}`,
+    loading: "lazy",
+    id: `sl-img-${i}`,
+    data_src: imgSrc,
+    class: "sl-img",
+    imgId: i
+    });
+    newImage.on('dblclick', (e) => {
+    document.dispatchEvent(new CustomEvent('dbClickSLImage', {
+    detail: {
+    e: e
+    }
+    }))
+    });
+    let imgDiv = $('<div>', {
+    class: 'page-container'
+    });
+    imgDiv.append($('<p>', {
+    class: 'page-text',
+    text: `(${i})/${imgCount}`
+    }));
+    imgDiv.append(newImage);
+    $('#img-con').append(imgDiv);
+    }
+    $('#img-input-container').css('display', 'none');
+    watchImageItems();
+    }
+    fetchItems();
+script(src='js/img-model.js')
