@@ -11,97 +11,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"
         integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="js/img-observe.js"></script> -->
-    <style>
-        /* 模态框样式 */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.8);
-            /* touch-action: none; */
-        }
-
-        .modal-content {
-            margin: 0% auto;
-            padding: 20px;
-            width: 60%;
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-        }
-
-        /* .modal-content {
-            position: absolute;
-            top: 40%;
-            left: 40%;
-            transform: translate(-40%, -40%);
-            max-width: 90%;
-            max-height: 90%;
-            justify-content: center;
-        } */
-
-        .modal-image {
-            display: flex;
-            width: auto;
-            max-width: max-content;
-            height: auto;
-            max-height: 100vh;
-            object-fit: scale-down;
-        }
-
-        .close {
-            color: rgb(245, 4, 76);
-            position: relative;
-            left: 20px;
-            font-size: 32px;
-            cursor: pointer;
-        }
-
-
-        .center-container {
-            display: list-item;
-            justify-content: center;
-            /* 水平居中 */
-            align-items: center;
-            /* 垂直居中 */
-            height: 100%;
-            /* 父元素高度 */
-        }
-
-        .centered-div {
-            background-color: lightblue;
-            padding: 1rem;
-            width: 100%;
-        }
-
-        .page-container {
-            position: relative;
-        }
-
-        .page-text {
-            position: absolute;
-            z-index: 2;
-            color: rgba(245, 11, 11, 0.5);
-            font-size: 40px;
-            /* 设置透明度，0.5表示50%透明 */
-        }
-
-        input,
-        span,
-        button {
-            font-size: 30px;
-        }
-    </style>
 </head>
 
 <body>
-
     <div class="center-container">
         <div class="centered-div">
             <span>url pattern</span>
@@ -132,10 +44,9 @@
             <button onclick="fetchItems()">Show Images</button>
         </div>
     </div>
-
     <script>
         function getImgCount() {
-            return Number($('#img-count').val().trim()); 
+            return Number($('#img-count').val().trim());
         }
 
         function fetchItems() {
@@ -148,7 +59,6 @@
             window.location.href = `/pics?hor=${hor}&startNumber=${startNumber}&padZeros=${padZeros}&imgCount=${imgCount}&useProxy=${useProxy}&pattern=${p}`;
         }
     </script>
-    <!-- <script src="js/img-model.js"></script> -->
 </body>
 
 </html>
