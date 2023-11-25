@@ -6,16 +6,17 @@ head
     title Horizontal Scroll Images
     script(src="js/jquery-3.7.1.min.js")
     script(src="js/hammer.min.js")
+    script(src="js/spotlight.bundle.js")
     //- script(src='https://code.jquery.com/jquery-3.7.1.min.js' integrity='sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=' crossorigin='anonymous')
     //- script(src='https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js' integrity='sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g==' crossorigin='anonymous' referrerpolicy='no-referrer')
     script(src='js/img-observe.js')
 div
-    #img-con.scrolling-container
+    #img-con.scrolling-container.spotlight-group 
         // Add more images
-#myModal.modal
-    .modal-content
-        span.close &times;
-        img#modal-image.modal-image(src='' alt='放大图片')
+//- #myModal.modal
+//-     .modal-content
+//-         span.close &times;
+//-         img#modal-image.modal-image(src='' alt='放大图片')
 script.
     const hor = #{tHor};
     if(!hor)
@@ -56,8 +57,10 @@ script.
     }
     }))
     });
-    let imgDiv = $('<div>', {
-    class: 'page-container'
+    let imgDiv = $('<a>', {
+    class: 'page-container spotlight',
+    href: `${imgSrc}`,
+    "data-download": true
     });
     imgDiv.append($('<p>', {
     class: 'page-text',
