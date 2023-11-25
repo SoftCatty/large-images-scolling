@@ -6,6 +6,14 @@ const port = 3001;
 //  static
 app.use(express.static(path.join(__dirname, 'public')))
 
+// cors
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//   next();
+// });
+
 // view
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -25,8 +33,8 @@ app.get('/pics', (req, res) => {
 });
 
 // proxy 
-const proxy = require('./routers/proxy');
-app.use('/proxy', proxy);
+// const proxy = require('./routers/proxy');
+// app.use('/proxy', proxy);
 
 app.listen(port, () => {
   console.log(`large-images-scrolling app listening on port ${port}`)
